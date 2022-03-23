@@ -1,0 +1,20 @@
+<div class="d-flex flex-column">
+  <button class="btn btn-primary m-4" (click)="generateActivity()">
+    Genera Attività
+  </button>
+  <ul *ngIf="activity">
+    <li>Attività: {{ activity.activity }}</li>
+    <li>Difficoltà: {{ activity.accessibility }}</li>
+    <li>Tipo: {{ activity.type }}</li>
+    <li>Partecipanti: {{ activity.participants }}</li>
+    <li>Prezzo: {{ activity.price }}</li>
+    <li>Link: {{ activity.link }}</li>
+  </ul>
+  <button
+    (click)="saveFavorite()"
+    class="btn btn-warning"
+    [disabled]="!activity"
+  >
+    Salva Preferito
+  </button>
+</div>

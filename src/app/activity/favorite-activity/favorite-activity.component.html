@@ -1,0 +1,48 @@
+<div class="container d-flex justify-content-center w-100 mt-5">
+  <table class="border border-1 w-100" *ngIf="savedActivities">
+    <tr>
+      <th>Attività</th>
+      <th>Difficoltà</th>
+      <th>Tipo</th>
+      <th>Partecipanti</th>
+      <th>Prezzo</th>
+      <th>Link</th>
+    </tr>
+    <tr
+      class="border border-1"
+      *ngFor="let singleActivity of savedActivities; let i = index"
+    >
+      <td>{{ singleActivity.activity }}</td>
+      <td *ngIf="singleActivity.accessibility">
+        {{
+          singleActivity.accessibility < 0.3
+            ? "Bassa"
+            : singleActivity.accessibility < 0.5 &&
+              singleActivity.accessibility > 0.3
+            ? "Media"
+            : singleActivity.accessibility > 0.5
+            ? "Alta"
+            : ""
+        }}
+      </td>
+      <td>{{ singleActivity.type }}</td>
+      <td>{{ singleActivity.participants }}</td>
+      <td>{{ singleActivity.price }}</td>
+      <td *ngIf="singleActivity.link; else noLink">
+        {{ singleActivity.link }}
+      </td>
+      <td>
+        <button class="btn btn-danger" (click)="deleteActivity(i)">
+          Elimina
+        </button>
+      </td>
+    </tr>
+  </table>
+</div>
+<div class="mt-4 w-100 d-flex justify-content-center" *ngIf="noFavorites">
+  <p class="text-center">Nessun'attività preferita</p>
+</div>
+
+<ng-template #noLink>
+  <td>Nessun link correlato</td>
+</ng-template>
